@@ -22,7 +22,7 @@ public class BootBoard {  // VO <--ORM--> Table
 	@Column(updatable = false)
 	private String writer;
 	
-	@Column(insertable = false, updatable = false, columnDefinition = "datetime") //컬럼 세부지정
+	@Column(insertable = false, updatable = false, columnDefinition = "datetime default now()") //컬럼 세부지정
 	private Date indate; // now
 	@Column(insertable = false, updatable = false, columnDefinition = "int default 0")
 	private Long count;
