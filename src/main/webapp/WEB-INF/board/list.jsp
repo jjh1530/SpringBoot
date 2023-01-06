@@ -27,6 +27,16 @@
 				regForm.submit();
 			}else if(oper == 'reset') {
 				regForm[0].reset();
+			}else if(oper == 'list') {
+				location.href="${cpath}/list";
+			}else if(oper =='remove') {
+				var idx=regForm.find("#idx").val();
+				location.href="${cpath}/remove?idx="+idx;
+			}else if(oper = 'updateForm') {
+				regForm.find("#title").attr("readonly",false);
+				regForm.find("#content").attr("readonly",false);
+				var upBtn="<button type='button' onclick='goUpdate()' class='btn btn-sm btn-info'>수정완료</button>"
+				$("#update").html(upBtn);
 			}
 		});
 		// 제목 클릭 시 상세보기
@@ -48,10 +58,17 @@
 		regForm.find("#title").val(vo.title);
 		regForm.find("#content").val(vo.content);
 		regForm.find("#wrtier").val(vo.wrtier);
+		regForm.find("#idx").val(vo.idx);
 		regForm.find("input").attr("readonly","true");
 		regForm.find("textarea").attr("readonly","true");
 		$("#regDiv").css("display","none");
 		$("#updateDiv").css("display","block");
+	}
+	
+	function goUpdate() {
+		regForm=$("#regForm");
+		regForm.attr("action","${cpath}/modify");
+		regForm.submit();
 	}
 	
 </script>
@@ -115,6 +132,7 @@
 				<div class="card" style="min-height: 500px; max-height: 1000px">
 					<div class="card-body">
 						<form id="regForm" action="${cpath}/register" method="post">
+							<input type="hidden" id="idx" name="idx" value="${vo.idx}"/>
 							<div class="form-group">
 								<label for="title">제목</label>
 								<input type="text" class="form-control" id="title" name="title" placeholder="title"/>
@@ -133,7 +151,7 @@
 							</div>
 							<div id="updateDiv" style="display:none">
 								<button type="button" data-oper="list" class="btn btn-sm btn-primary">목록</button>
-								<button type="button" data-oper="updateForm" class="btn btn-sm btn-warning">수정</button>
+								<span id="update"><button type="button" data-oper="updateForm" class="btn btn-sm btn-warning">수정</button></span>
 								<button type="button" data-oper="remove" class="btn btn-sm btn-success">삭제</button>
 							</div>
 						</form>

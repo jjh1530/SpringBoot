@@ -46,4 +46,16 @@ public class BootBoardController {
 		BootBoard vo = bootBoardService.get(idx);
 		return vo;
 	}
+	
+	@GetMapping("/remove")
+	public String remove(Long idx) {
+		bootBoardService.delete(idx);
+		return "redirect:/list";
+	}
+	
+	@PostMapping("/modify")
+	public String modify(BootBoard vo) {
+		bootBoardService.update(vo);
+		return "redirect:/list";
+	}
 }

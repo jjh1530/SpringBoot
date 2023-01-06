@@ -31,6 +31,17 @@ public class BootBoardServiceImpl implements BootBoardService {
 		Optional<BootBoard> vo =  bootBoardRepository.findById(idx);
 		return vo.get();
 	}
+	
+	@Override
+	public void delete(Long idx) {
+		bootBoardRepository.deleteById(idx);
+		
+	}
+	
+	@Override
+	public void update(BootBoard vo) {
+		bootBoardRepository.save(vo); // insert idx가 없으면 수정
+	}
 }
 
 

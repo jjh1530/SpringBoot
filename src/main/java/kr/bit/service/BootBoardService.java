@@ -11,4 +11,8 @@ public interface BootBoardService {
 	public void register(BootBoard vo); //글 등록
 	
 	public BootBoard get(Long idx);
+	
+	public void delete(Long idx);
+	
+	public void update(BootBoard vo);
 }
